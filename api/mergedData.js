@@ -1,20 +1,20 @@
 import { getAuthorBooks, getSingleAuthor, deleteSingleAuthor } from './authorData';
 import { getSingleBook, deleteBook } from './bookData';
 
-const viewBookDetails = (bookFirebaseKey) => new Promise((resolve, reject) => {
-  getSingleBook(bookFirebaseKey)
-    .then((bookObject) => {
-      getSingleAuthor(bookObject.author_id)
-        .then((authorObject) => {
-          resolve({ authorObject, ...bookObject });
+const viewBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
+  getSingleBook(firebaseKey)
+    .then((bookObj) => {
+      getSingleAuthor(bookObj.author_id)
+        .then((authorObj) => {
+          resolve({ authorObj, ...bookObj });
         });
     }).catch((error) => reject(error));
 });
 
-const viewAuthorDetails = (authorFirebaseKey) => new Promise((resolve, reject) => {
-  Promise.all([getSingleAuthor(authorFirebaseKey), getAuthorBooks(authorFirebaseKey)])
-    .then(([authorObject, authorBooksArray]) => {
-      resolve({ ...authorObject, books: authorBooksArray });
+const viewAuthorDetails = (firebaseKey) => new Promise((resolve, reject) => {
+  Promise.all([getSingleAuthor(firebaseKey), getAuthorBooks(firebaseKey)])
+    .then(([authorObj, authorBooksArray]) => {
+      resolve({ ...authorObj, books: authorBooksArray });
     }).catch((error) => reject(error));
 });
 
