@@ -9,12 +9,11 @@ export default function ShowAuthors() {
 
   const getAllAuthors = () => {
     getAuthors(user.uid).then(setAuthors);
-    console.warn(authors);
   };
 
   useEffect(() => {
     getAllAuthors();
-  });
+  }, []);
 
   return (
     <div>

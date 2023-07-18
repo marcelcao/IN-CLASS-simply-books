@@ -11,8 +11,8 @@ const viewBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-const viewAuthorDetails = (firebaseKey) => new Promise((resolve, reject) => {
-  Promise.all([getSingleAuthor(firebaseKey), getAuthorBooks(firebaseKey)])
+const viewAuthorDetails = (authorFirebaseKey) => new Promise((resolve, reject) => {
+  Promise.all([getSingleAuthor(authorFirebaseKey), getAuthorBooks(authorFirebaseKey)])
     .then(([authorObj, authorBooksArray]) => {
       resolve({ ...authorObj, books: authorBooksArray });
     }).catch((error) => reject(error));
